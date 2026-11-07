@@ -1,0 +1,2715 @@
+<!DOCTYPE html>
+<html lang="ar" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="description" content="الموقع الشخصي لاسامه الحداد، المهتم بالهندسة المعمارية.">
+
+<title>اسامه الحداد | موقعي الشخصي</title>
+
+<style>
+:root {
+  --bg: #fcfbf9;
+  --paper: #ffffff;
+  --ink: #2c3e50;
+  --navy: #2c3e50;
+  --navy-light: #354b60;
+  --accent: #e67e22;
+  --text: #333333;
+  --muted: #777777;
+  --line: #e5e2dc;
+  --white: #ffffff;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 90px;
+}
+
+body {
+  font-family: Tahoma, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.9;
+  overflow-x: hidden;
+}
+
+body.menu-open {
+  overflow: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+.container {
+  width: min(1100px, 90%);
+  margin: auto;
+}
+
+/* Arabic text: same layout as English/Turkish, only the text itself reads right-to-left */
+
+html[lang="ar"] [data-ar] {
+  direction: rtl;
+  text-align: inherit;
+}
+
+/* Orange line under titles */
+
+.title-line::after {
+  content: "";
+  display: block;
+  width: 65px;
+  height: 3px;
+  background: var(--accent);
+  margin-top: 14px;
+}
+
+/* Header */
+
+header {
+  width: 100%;
+  padding: 22px 0;
+  border-bottom: 1px solid var(--line);
+  background: var(--bg);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.logo {
+  font-family: Georgia, serif;
+  font-size: 22px;
+  font-weight: bold;
+  color: var(--navy);
+  letter-spacing: 1px;
+}
+
+html[lang="ar"] .logo {
+  font-family: Tahoma, Arial, sans-serif;
+  letter-spacing: 0;
+}
+
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+/* Language Button */
+
+.language-btn {
+  background: var(--accent);
+  border: 1px solid var(--accent);
+  color: var(--white);
+  padding: 7px 16px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: bold;
+  border-radius: 30px;
+  transition: all 0.3s ease;
+}
+
+.language-btn:hover {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: var(--white);
+  transform: translateY(-2px);
+}
+
+.menu-btn {
+  width: 35px;
+  height: 35px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  position: relative;
+  z-index: 101;
+}
+
+.menu-btn span {
+  height: 2px;
+  width: 25px;
+  background: var(--navy);
+  display: block;
+  transition: 0.3s;
+}
+
+/* Navigation */
+
+.nav-menu {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 300px;
+  max-width: 85%;
+  height: 100vh;
+  height: 100dvh;
+  background: var(--navy);
+  color: var(--white);
+  padding: 100px 35px 40px;
+  z-index: 1001;
+  transform: translateX(110%);
+  visibility: hidden;
+  transition:
+    transform 0.4s ease,
+    visibility 0.4s ease;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.nav-menu.active {
+  transform: translateX(0);
+  visibility: visible;
+}
+
+.nav-menu a {
+  display: block;
+  padding: 15px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+  font-size: 15px;
+  transition:
+    color 0.3s ease,
+    padding 0.3s ease;
+}
+
+.nav-menu a:hover {
+  color: var(--accent);
+  padding-left: 10px;
+}
+
+/* Close Menu Button */
+
+.close-menu {
+  position: absolute;
+  top: 25px;
+  left: 25px;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 35px;
+  cursor: pointer;
+  z-index: 1002;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.3s ease;
+}
+
+.close-menu:hover {
+  color: var(--accent);
+}
+
+/* Backdrop */
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(44,62,80,0.45);
+  opacity: 0;
+  visibility: hidden;
+  z-index: 1000;
+  transition:
+    opacity 0.3s ease,
+    visibility 0.3s ease;
+}
+
+.backdrop.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Hero */
+
+.hero {
+  padding: 0 0 90px;
+}
+
+.hero-banner {
+  position: relative;
+  width: 100%;
+  height: 22vh;
+  min-height: 150px;
+  max-height: 210px;
+  overflow: hidden;
+  background: linear-gradient(180deg, #cfe3f0 0%, #dfe9f1 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-banner-caption {
+  color: var(--navy);
+  font-size: 14px;
+  opacity: 0.8;
+  text-align: center;
+  max-width: 480px;
+  padding: 0 20px;
+  position: relative;
+  z-index: 1;
+}
+
+/* a light fade right at the bottom edge only */
+
+.hero-banner::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 30%;
+  background: linear-gradient(to bottom,
+    rgba(252,251,249,0) 0%,
+    rgba(252,251,249,0.6) 60%,
+    var(--bg) 100%);
+  pointer-events: none;
+}
+
+.hero > .container {
+  position: relative;
+  z-index: 3;
+  margin-top: -12px;
+}
+
+.hero-content {
+  max-width: 800px;
+}
+
+.hero-label {
+  color: var(--navy);
+  font-size: 13px;
+  margin-bottom: 25px;
+}
+
+.hero h1 {
+  font-size: clamp(38px, 7vw, 78px);
+  line-height: 1.3;
+  font-weight: 500;
+  color: var(--navy);
+  margin-bottom: 5px;
+}
+
+.hero-email {
+  display: inline-block;
+  font-family: Georgia, serif;
+  font-size: 14px;
+  color: var(--navy);
+  direction: ltr;
+  text-align: left;
+  text-decoration: none;
+  margin-top: 5px;
+  margin-bottom: 20px;
+  opacity: 0.75;
+  transition: 0.3s ease;
+}
+
+.hero-email:hover {
+  opacity: 1;
+  color: var(--accent);
+}
+
+.hero h2 {
+  font-size: clamp(19px, 3vw, 29px);
+  font-weight: 400;
+  color: var(--navy);
+  line-height: 1.8;
+  margin-bottom: 25px;
+}
+
+.hero p {
+  color: var(--text);
+  max-width: 650px;
+  font-size: 15px;
+}
+
+.hero-line {
+  width: 65px;
+  height: 3px;
+  background: var(--accent);
+  margin-top: 35px;
+}
+
+/* General Sections */
+
+section {
+  padding: 100px 0;
+  scroll-margin-top: 90px;
+}
+
+.section-label {
+  color: var(--accent);
+  font-size: 12px;
+  margin-bottom: 15px;
+}
+
+.section-title {
+  color: var(--navy);
+  font-size: clamp(27px, 4vw, 43px);
+  font-weight: 500;
+  margin-bottom: 35px;
+  line-height: 1.5;
+}
+
+.section-intro {
+  color: var(--muted);
+  font-size: 15px;
+  max-width: 700px;
+  margin-bottom: 50px;
+}
+
+/* About */
+
+.about {
+  background: var(--paper);
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  align-items: start;
+}
+
+.about-text {
+  max-width: 800px;
+}
+
+.about-text p {
+  margin-bottom: 22px;
+  font-size: 15px;
+  color: var(--text);
+}
+
+.stats {
+  border-top: 1px solid var(--line);
+}
+
+.stat {
+  padding: 25px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.stat-number {
+  font-size: 35px;
+  color: var(--navy);
+  font-family: Georgia, serif;
+  direction: ltr;
+  text-align: left;
+}
+
+.stat-label {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+/* Education inside About */
+
+.about-education {
+  margin-top: 80px;
+}
+
+.education-title {
+  color: var(--navy);
+  font-size: clamp(24px, 3.5vw, 34px);
+  font-weight: 500;
+  margin-bottom: 25px;
+  line-height: 1.5;
+}
+
+/* Portfolio */
+
+.portfolio {
+  background: var(--paper);
+}
+
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+}
+
+.project-card {
+  background: var(--bg);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  transition:
+    transform 0.3s,
+    box-shadow 0.3s;
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(44,62,80,0.08);
+}
+
+.project-image {
+  width: 100%;
+  height: 280px;
+  background: #f0eee9;
+  overflow: hidden;
+}
+
+.project-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.project-info {
+  padding: 25px;
+}
+
+.project-number {
+  color: var(--accent);
+  font-size: 12px;
+  margin-bottom: 8px;
+  direction: ltr;
+  text-align: left;
+}
+
+.project-info h3 {
+  color: var(--navy);
+  font-size: 21px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.project-info p {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* Mosque Project */
+
+.mosque {
+  background: var(--navy);
+  color: var(--white);
+}
+
+.mosque .section-title {
+  color: var(--white);
+}
+
+.mosque .section-intro {
+  color: #e2e7ec;
+}
+
+.mosque-status {
+  display: inline-block;
+  padding: 3px 14px;
+  border: 1px solid var(--accent);
+  border-radius: 30px;
+  color: var(--accent);
+  font-size: 12px;
+  margin-bottom: 25px;
+}
+
+.concept-note {
+  border-left: 3px solid var(--accent);
+  background: var(--navy-light);
+  padding: 25px 28px;
+  margin-bottom: 50px;
+}
+
+.concept-note .concept-label {
+  color: var(--accent);
+  font-size: 12px;
+  margin-bottom: 12px;
+}
+
+.concept-note p {
+  color: #e2e7ec;
+  font-size: 14px;
+  margin-bottom: 14px;
+}
+
+.concept-note p:last-child {
+  margin-bottom: 0;
+}
+
+.mosque-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: stretch;
+}
+
+.mosque-image {
+  min-height: 380px;
+  background: var(--navy-light);
+  border: 1px solid rgba(255,255,255,0.12);
+  overflow: hidden;
+}
+
+.mosque-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.mosque-points {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.mosque-point {
+  background: var(--navy-light);
+  border: 1px solid rgba(255,255,255,0.12);
+  padding: 22px 25px;
+}
+
+.mosque-point .number {
+  color: var(--accent);
+  font-family: Georgia, serif;
+  font-size: 14px;
+  direction: ltr;
+  text-align: left;
+}
+
+.mosque-point h3 {
+  color: var(--white);
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+
+.mosque-point p {
+  color: #e2e7ec;
+  font-size: 13px;
+}
+
+/* Hero note */
+
+.hero-note {
+  display: inline-block;
+  margin-top: 28px;
+  padding: 12px 18px;
+  background: var(--paper);
+  border-left: 3px solid var(--accent);
+  color: var(--navy);
+  font-size: 14px;
+  transition: 0.3s ease;
+}
+
+.hero-note:hover {
+  color: var(--accent);
+}
+
+/* 3D viewer */
+
+.mosque-image {
+  position: relative;
+}
+
+#mosqueCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  cursor: grab;
+  touch-action: none;
+}
+
+#mosqueCanvas:active {
+  cursor: grabbing;
+}
+
+#mosqueFallback[hidden] {
+  display: none;
+}
+
+.viewer-ui {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: rgba(44,62,80,0.7);
+  color: #e2e7ec;
+  font-size: 12px;
+  line-height: 1.6;
+  z-index: 2;
+}
+
+.viewer-reset {
+  flex-shrink: 0;
+  background: none;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  border-radius: 30px;
+  padding: 4px 14px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.viewer-reset:hover {
+  background: var(--accent);
+  color: var(--white);
+}
+
+/* Hand Drawings */
+
+.handdrawn {
+  background: var(--bg);
+}
+
+.handdrawn .project-card {
+  background: var(--paper);
+}
+
+.handdrawn-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+}
+
+.handdrawn-grid .project-image {
+  height: 320px;
+}
+
+/* Vision */
+
+.vision {
+  background: var(--navy);
+  color: var(--white);
+}
+
+.vision .section-label {
+  color: var(--accent);
+}
+
+.vision .section-title {
+  color: var(--white);
+}
+
+.vision .section-intro {
+  color: #e2e7ec;
+}
+
+.vision-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.vision-card {
+  background: var(--navy-light);
+  padding: 35px 25px;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
+.vision-card:hover {
+  transform: translateY(-5px);
+  background: #3b536b;
+}
+
+.vision-card .number {
+  color: var(--accent);
+  font-family: Georgia, serif;
+  font-size: 30px;
+  margin-bottom: 20px;
+  direction: ltr;
+  text-align: left;
+}
+
+.vision-card h3 {
+  color: var(--white);
+  font-size: 19px;
+  font-weight: 500;
+  margin-bottom: 15px;
+}
+
+.vision-card p {
+  color: #e2e7ec;
+  font-size: 13px;
+}
+
+/* Education */
+
+.education {
+  background: var(--bg);
+}
+
+.education-item {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 40px;
+  padding: 30px 0;
+  border-top: 1px solid var(--line);
+}
+
+.education-year {
+  color: var(--accent);
+  font-family: Georgia, serif;
+  font-size: 18px;
+  direction: ltr;
+  text-align: left;
+}
+
+.education-content h3 {
+  color: var(--navy);
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.education-content p {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* Research */
+
+.research {
+  background: var(--paper);
+}
+
+.research-content {
+  max-width: 750px;
+}
+
+.research-content p {
+  font-size: 15px;
+  margin-bottom: 25px;
+}
+
+.research-note {
+  border-left: 3px solid var(--accent);
+  padding: 20px 25px;
+  background: var(--bg);
+  color: var(--muted);
+  font-size: 13px;
+  margin-top: 35px;
+}
+
+/* Contact */
+
+.contact {
+  background: var(--paper);
+  text-align: center;
+}
+
+.contact .section-title {
+  margin-bottom: 20px;
+}
+
+.contact p {
+  color: var(--muted);
+  font-size: 14px;
+  margin-bottom: 35px;
+}
+
+.contact-email {
+  display: inline-block;
+  font-family: Georgia, serif;
+  font-size: clamp(18px, 3vw, 26px);
+  color: var(--navy);
+  border-bottom: 1px solid var(--accent);
+  padding-bottom: 8px;
+  direction: ltr;
+}
+
+.contact-email:hover {
+  color: var(--accent);
+}
+
+.cv-link {
+  display: inline-block;
+  margin-top: 30px;
+  padding: 10px 25px;
+  border: 1px solid var(--navy);
+  border-radius: 30px;
+  color: var(--navy);
+  font-size: 13px;
+  transition: 0.3s;
+}
+
+.cv-link:hover {
+  background: var(--navy);
+  color: var(--white);
+}
+
+/* Footer */
+
+footer {
+  background: var(--navy);
+  color: #e2e7ec;
+  padding: 25px 0;
+  font-size: 12px;
+}
+
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.footer-name {
+  color: var(--white);
+}
+
+/* Responsive */
+
+@media (max-width: 768px) {
+
+  .hero {
+    padding: 0 0 70px;
+  }
+
+  section {
+    padding: 70px 0;
+  }
+
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .portfolio-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .project-image {
+    height: 230px;
+  }
+
+  .vision-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .mosque-grid,
+  .handdrawn-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .mosque-image {
+    min-height: 250px;
+  }
+
+  .education-item {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .footer-inner {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+
+  .container {
+    width: 88%;
+  }
+
+  .logo {
+    font-size: 17px;
+  }
+
+  .header-controls {
+    gap: 12px;
+  }
+
+  .hero h1 {
+    font-size: 40px;
+  }
+
+  .hero-email {
+    font-size: 13px;
+  }
+
+  .project-info {
+    padding: 20px;
+  }
+
+  .nav-menu {
+    width: 270px;
+    max-width: 85%;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Header -->
+
+<header>
+  <div class="container header-inner">
+
+    <a href="#home"
+       class="logo"
+       data-ar="اسامه الحداد"
+       data-en="Osama Al-Haddad"
+       data-tr="Osama Al-Haddad">
+‎      اسامه الحداد
+    </a>
+
+    <div class="header-controls">
+
+      <button
+        class="language-btn"
+        id="languageBtn"
+        type="button">
+‎        العربية
+      </button>
+
+      <button
+        class="menu-btn"
+        id="menuBtn"
+        type="button"
+        aria-label="فتح القائمة"
+        aria-expanded="false"
+        aria-controls="navMenu">
+
+        <span></span>
+        <span></span>
+
+      </button>
+
+    </div>
+  </div>
+</header>
+
+<!-- Navigation -->
+
+<div
+  class="backdrop"
+  id="backdrop">
+</div>
+
+<nav
+  class="nav-menu"
+  id="navMenu"
+  aria-hidden="true">
+
+  <button
+    class="close-menu"
+    id="closeMenuBtn"
+    type="button"
+    aria-label="إغلاق القائمة">
+    &times;
+  </button>
+
+  <a href="#home"
+     data-ar="الرئيسية"
+     data-en="Home"
+     data-tr="Ana Sayfa">
+‎    الرئيسية
+  </a>
+
+  <a href="#about"
+     data-ar="نبذة عني"
+     data-en="About Me"
+     data-tr="Hakkımda">
+‎    نبذة عني
+  </a>
+
+  <a href="#handdrawn"
+     data-ar="الرسم اليدوي"
+     data-en="Hand Drawing"
+     data-tr="El Çizimi">
+‎    الرسم اليدوي
+  </a>
+
+  <a href="#portfolio"
+     data-ar="أعمالي"
+     data-en="My Work"
+     data-tr="Çalışmalarım">
+‎    أعمالي
+  </a>
+
+  <a href="#mosque"
+     data-ar="مشروع المسجد"
+     data-en="Mosque Project"
+     data-tr="Cami Projesi">
+‎    مشروع المسجد
+  </a>
+
+  <a href="#research"
+     data-ar="اهتمامات بحثية"
+     data-en="Research Interests"
+     data-tr="Araştırma İlgi Alanları">
+‎    اهتمامات بحثية
+  </a>
+
+  <a href="#vision"
+     data-ar="اهتماماتي"
+     data-en="My Interests"
+     data-tr="İlgi Alanlarım">
+‎    اهتماماتي
+  </a>
+
+  <a href="#contact"
+     data-ar="تواصل معي"
+     data-en="Contact"
+     data-tr="İletişim">
+‎    تواصل معي
+  </a>
+
+</nav>
+
+<!-- Hero -->
+
+<main>
+
+<section class="hero" id="home">
+
+  <div class="hero-banner"></div>
+
+  <div class="container">
+
+    <div class="hero-content">
+
+      <div class="hero-label title-line"
+           data-ar="موقعي الشخصي"
+           data-en="MY PERSONAL WEBSITE"
+           data-tr="KİŞİSEL WEB SİTEM">
+‎        موقعي الشخصي
+      </div>
+
+      <h1
+        data-ar="اسامه الحداد"
+        data-en="Osama Al-Haddad"
+        data-tr="Osama Al-Haddad">
+‎        اسامه الحداد
+      </h1>
+
+      <a
+        href="mailto:a4440767@gmail.com"
+        class="hero-email">
+        a4440767@gmail.com
+      </a>
+
+      <h2
+        data-ar="مهتم بالتصميم والفراغات ويطمح إلى دراسة الهندسة المعمارية في تركيا."
+        data-en="Interested in design and spaces, and aspiring to study architecture in Turkey."
+        data-tr="Tasarıma ve mekânlara ilgi duyan, Türkiye'de mimarlık okumayı hedefleyen biri.">
+‎        مهتم بالتصميم والفراغات ويطمح إلى دراسة الهندسة المعمارية في تركيا.
+      </h2>
+
+      <p
+        data-ar="أنا خريج ثانوية ويهمني كيف تنتقل الفكرة من الرسم والتصميم إلى مبنى حقيقي. لذلك أهتم بالهندسة المعمارية من ناحية التصميم والفراغات والواجهات. وأتطلع إلى مواصلة دراستي الجامعية في تركيا حيث تلتقي العمارة العثمانية العريقة بالتصميم الحديث. وأنقل ما سأتعلمه بإذن الله في المستقبل إلى بلدي اليمن لأساهم في دفع عجلة التنمية فيها. أنشأت هذا الموقع لأعرّف بنفسي وأشارك محاولاتي وما أطمح إلى تعلمه."
+        data-en="I am a high school graduate interested in how ideas evolve from drawings and designs into real buildings. My interest lies in architecture, particularly design, spatial composition and facades. I look forward to continuing my university studies in Turkey, where historic Ottoman architecture meets modern design, and to bring back what I learn, God willing, to my country, Yemen, to help turn the wheel of its development. I created this website to introduce myself and share my work and aspirations."
+        data-tr="Lise mezunuyum. Fikirlerin çizim ve tasarımdan gerçek yapılara nasıl dönüştüğüyle ilgileniyorum. Mimarlığın tasarım, mekân kurgusu ve cephe boyutlarına ilgi duyuyorum. Üniversite eğitimime, köklü Osmanlı mimarisinin modern tasarımla buluştuğu Türkiye'de devam etmeyi hedefliyorum; inşallah öğreneceklerimi gelecekte ülkem Yemen'e taşıyarak kalkınma çarkını döndürmeye katkıda bulunmayı umuyorum. Bu siteyi kendimi tanıtmak ve çalışmalarımı paylaşmak amacıyla oluşturdum.">
+‎        أنا خريج ثانوية ويهمني كيف تنتقل الفكرة من الرسم والتصميم إلى مبنى حقيقي. لذلك أهتم بالهندسة المعمارية من ناحية التصميم والفراغات والواجهات. وأتطلع إلى مواصلة دراستي الجامعية في تركيا حيث تلتقي العمارة العثمانية العريقة بالتصميم الحديث. وأنقل ما سأتعلمه بإذن الله في المستقبل إلى بلدي اليمن لأساهم في دفع عجلة التنمية فيها. أنشأت هذا الموقع لأعرّف بنفسي وأشارك محاولاتي وما أطمح إلى تعلمه.
+      </p>
+
+      <a href="#mosque"
+         class="hero-note"
+         data-ar="عملت على تصميم مشروع بسيط لمسجد بطابع عثماني يمني، وهذا يعكس شغفي وطموحي في التصميم الهندسي. تفاصيله في الأسفل ↓"
+         data-en="I worked on the design of a simple mosque project with an Ottoman–Yemeni character, which reflects my passion and ambition in architectural design. Details below ↓"
+         data-tr="Osmanlı–Yemen karakterinde basit bir cami projesinin tasarımı üzerinde çalıştım; bu, mimari tasarımdaki tutkumu ve hedeflerimi yansıtıyor. Ayrıntılar aşağıda ↓">
+‎        عملت على تصميم مشروع بسيط لمسجد بطابع عثماني يمني، وهذا يعكس شغفي وطموحي في التصميم الهندسي. تفاصيله في الأسفل ↓
+      </a>
+
+      <div class="hero-line"></div>
+
+    </div>
+  </div>
+
+</section>
+
+<!-- About -->
+
+<section class="about" id="about">
+
+  <div class="container">
+
+    <h2 class="section-title title-line"
+        data-ar="نبذة عني"
+        data-en="About Me"
+        data-tr="Hakkımda">
+‎      نبذة عني
+    </h2>
+
+    <div class="about-grid">
+
+      <div class="about-text">
+
+        <p
+          data-ar="اسمي اسامه أحمد محمد الحداد. أنهيت المرحلة الثانوية في المملكة العربية السعودية عام 2024 وكان معدلي 98.23%."
+          data-en="My name is Osama Ahmed Mohammed Al-Haddad. I completed high school in Saudi Arabia in 2024 with a GPA of 98.23%."
+          data-tr="Benim adım Osama Ahmed Mohammed Al-Haddad. 2024 yılında Suudi Arabistan'da lise eğitimimi %98,23 not ortalamasıyla tamamladım.">
+‎          اسمي اسامه أحمد محمد الحداد. أنهيت المرحلة الثانوية في المملكة العربية السعودية عام 2024 وكان معدلي 98.23%.
+        </p>
+
+        <p
+          data-ar="بدأ اهتمامي بالعمارة من ملاحظتي للمباني من حولي مثل شكل الواجهات وتوزيع النوافذ وطريقة دخول الضوء. ومع الوقت صرت أحب الرسم والتصميم أكثر. ما زلت في بداية الطريق وأعرف أن أمامي الكثير لأتعلمه."
+          data-en="My interest in architecture began with observing the buildings around me, such as their facades, window arrangements and the way light enters. Over time my love for drawing and design only grew. I am still at the beginning of this journey and have much to learn."
+          data-tr="Mimarlığa olan ilgim çevremdeki binaları gözlemlemekle başladı. Cepheleri, pencerelerin yerleşimi ve ışığın içeri girişi dikkatimi çekiyordu. Zamanla çizim ve tasarıma olan ilgim giderek arttı. Bu yolculuğun henüz başındayım ve öğrenecek çok şeyim var.">
+‎          بدأ اهتمامي بالعمارة من ملاحظتي للمباني من حولي مثل شكل الواجهات وتوزيع النوافذ وطريقة دخول الضوء. ومع الوقت صرت أحب الرسم والتصميم أكثر. ما زلت في بداية الطريق وأعرف أن أمامي الكثير لأتعلمه.
+        </p>
+
+        <p
+          data-ar="أرغب في دراسة الهندسة المعمارية بسبب اهتمامي بالرسم والتصميم. وأطمح أن تكون دراستي في تركيا لأنها تجمع بين إرث معماري عثماني عريق وتجارب معمارية حديثة. أتمنى أن أتعلم منها وأن أطبق ما أتعلمه في مشاريعي، مثل فكرة المسجد التي عملت عليها."
+          data-en="I hope to study architecture because of my passion for drawing and design. I aspire to do so in Turkey, which combines a rich Ottoman architectural heritage with modern architectural experiences. I hope to learn from them and apply what I learn in my own projects, such as my simple mosque idea."
+          data-tr="Çizim ve tasarıma olan ilgim nedeniyle mimarlık okumak istiyorum. Eğitimimi, köklü Osmanlı mimari mirasını modern mimari deneyimlerle bir araya getiren Türkiye'de almak istiyorum ve öğrendiklerimi üzerinde çalıştığım cami fikri gibi kendi projelerimde uygulamayı hedefliyorum.">
+‎          أرغب في دراسة الهندسة المعمارية بسبب اهتمامي بالرسم والتصميم. وأطمح أن تكون دراستي في تركيا لأنها تجمع بين إرث معماري عثماني عريق وتجارب معمارية حديثة. أتمنى أن أتعلم منها وأن أطبق ما أتعلمه في مشاريعي، مثل فكرة المسجد التي عملت عليها.
+        </p>
+
+        <p
+          data-ar="وأتمنى أن أنقل ما سأتعلمه بإذن الله في المستقبل إلى بلدي اليمن، لأساهم في دفع عجلة التنمية فيها."
+          data-en="I hope, God willing, to bring back what I learn to my country, Yemen, to help turn the wheel of its development."
+          data-tr="İnşallah öğreneceklerimi gelecekte ülkem Yemen'e taşıyarak kalkınma çarkını döndürmeye katkıda bulunmayı umuyorum.">
+‎          وأتمنى أن أنقل ما سأتعلمه بإذن الله في المستقبل إلى بلدي اليمن، لأساهم في دفع عجلة التنمية فيها.
+        </p>
+
+      </div>
+
+    </div>
+
+    <div class="about-education">
+
+    <h3 class="education-title"
+        data-ar="التعليم"
+        data-en="Education"
+        data-tr="Eğitim">
+‎      التعليم
+    </h3>
+
+    <div class="education-item">
+
+      <div class="education-year">2024</div>
+
+      <div class="education-content">
+
+        <h3
+          data-ar="شهادة الثانوية العامة"
+          data-en="High School Diploma"
+          data-tr="Lise Diploması">
+‎          شهادة الثانوية العامة
+        </h3>
+
+        <p
+          data-ar="المملكة العربية السعودية، معدل 98.23%"
+          data-en="Saudi Arabia, GPA 98.23%"
+          data-tr="Suudi Arabistan, not ortalaması %98,23">
+‎          المملكة العربية السعودية، معدل 98.23%
+        </p>
+
+      </div>
+
+    </div>
+
+    <div class="education-item">
+
+      <div class="education-year"
+           data-ar="المرحلة القادمة"
+           data-en="NEXT STEP"
+           data-tr="SONRAKİ ADIM">
+‎        المرحلة القادمة
+      </div>
+
+      <div class="education-content">
+
+        <h3
+          data-ar="الهندسة المعمارية"
+          data-en="Architecture"
+          data-tr="Mimarlık">
+‎          الهندسة المعمارية
+        </h3>
+
+        <p
+          data-ar="أطمح إلى مواصلة دراستي الجامعية في الهندسة المعمارية في تركيا والتعمق في فهم المباني من ناحية التصميم والفراغات."
+          data-en="I aspire to pursue university studies in architecture in Turkey, developing a deeper understanding of buildings from a design and spatial perspective."
+          data-tr="Türkiye'de mimarlık alanında üniversite eğitimime devam ederek binaları tasarım ve mekân açısından daha derinlemesine anlamayı hedefliyorum.">
+‎          أطمح إلى مواصلة دراستي الجامعية في الهندسة المعمارية في تركيا والتعمق في فهم المباني من ناحية التصميم والفراغات.
+        </p>
+
+      </div>
+
+    </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- Hand Drawings -->
+
+<section class="handdrawn" id="handdrawn">
+
+  <div class="container">
+
+    <div class="section-label"
+         data-ar="رسوماتي"
+         data-en="MY SKETCHES"
+         data-tr="ÇİZİMLERİM">
+‎      رسوماتي
+    </div>
+
+    <h2 class="section-title"
+        data-ar="الرسم اليدوي"
+        data-en="Hand Drawing"
+        data-tr="El Çizimi">
+‎      الرسم اليدوي
+    </h2>
+
+    <p class="section-intro"
+       data-ar="رسومات بالقلم والورق أعبّر بها عن أفكاري المعمارية قبل نقلها إلى التصميم."
+       data-en="Pen-and-paper drawings through which I express my architectural ideas before turning them into designs."
+       data-tr="Mimari fikirlerimi tasarıma dönüştürmeden önce kalem ve kâğıtla ifade ettiğim çizimler.">
+‎      رسومات بالقلم والورق أعبّر بها عن أفكاري المعمارية قبل نقلها إلى التصميم.
+    </p>
+
+    <div class="handdrawn-grid">
+
+      <article class="project-card">
+
+        <div class="project-image">
+          <img src="images/hand1.jpg"
+               alt="رسم يدوي 1"
+               onerror="this.style.display='none'">
+        </div>
+
+        <div class="project-info">
+
+          <div class="project-number">01</div>
+
+          <h3
+            data-ar="رسم يدوي 1"
+            data-en="Hand Drawing 1"
+            data-tr="El Çizimi 1">
+‎            رسم يدوي 1
+          </h3>
+
+        </div>
+
+      </article>
+
+      <article class="project-card">
+
+        <div class="project-image">
+          <img src="images/hand2.jpg"
+               alt="رسم يدوي 2"
+               onerror="this.style.display='none'">
+        </div>
+
+        <div class="project-info">
+
+          <div class="project-number">02</div>
+
+          <h3
+            data-ar="رسم يدوي 2"
+            data-en="Hand Drawing 2"
+            data-tr="El Çizimi 2">
+‎            رسم يدوي 2
+          </h3>
+
+        </div>
+
+      </article>
+
+      <article class="project-card">
+
+        <div class="project-image">
+          <img src="images/hand3.jpg"
+               alt="رسم يدوي 3"
+               onerror="this.style.display='none'">
+        </div>
+
+        <div class="project-info">
+
+          <div class="project-number">02</div>
+
+          <h3
+            data-ar="رسم يدوي 3"
+            data-en="Hand Drawing 3"
+            data-tr="El Çizimi 3">
+‎            رسم يدوي 3
+          </h3>
+
+        </div>
+
+      </article>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- Portfolio -->
+
+<section class="portfolio" id="portfolio">
+
+  <div class="container">
+
+    <div class="section-label"
+         data-ar="أعمال وتجارب"
+         data-en="WORK & EXPERIMENTS"
+         data-tr="ÇALIŞMALAR VE DENEYLER">
+‎      أعمال وتجارب
+    </div>
+
+    <h2 class="section-title"
+        data-ar="أعمالي"
+        data-en="My Work"
+        data-tr="Çalışmalarım">
+‎      أعمالي
+    </h2>
+
+
+    <div class="portfolio-grid">
+
+      <article class="project-card">
+
+        <div class="project-image">
+          <img src="images/perspective.jpg"
+               alt="رسم منظور معماري"
+               onerror="this.style.display='none'">
+        </div>
+
+        <div class="project-info">
+
+          <div class="project-number">01</div>
+
+          <h3
+            data-ar="رسم المنظور"
+            data-en="Perspective Drawing"
+            data-tr="Perspektif Çizimi">
+‎            رسم المنظور
+          </h3>
+
+          <p
+            data-ar="محاولة لفهم العمق والأبعاد وكيفية تمثيل المبنى على سطح ثنائي الأبعاد."
+            data-en="An attempt to understand depth, dimensions, and how a building is represented on a two-dimensional surface."
+            data-tr="Derinliği, boyutları ve bir yapının iki boyutlu yüzeyde nasıl gösterildiğini anlamaya yönelik bir deneme.">
+‎            محاولة لفهم العمق والأبعاد وكيفية تمثيل المبنى على سطح ثنائي الأبعاد.
+          </p>
+
+        </div>
+
+      </article>
+
+
+      <article class="project-card">
+
+        <div class="project-image">
+          <img src="images/3d.jpg"
+               alt="رسم ثلاثي الأبعاد"
+               onerror="this.style.display='none'">
+        </div>
+
+        <div class="project-info">
+
+          <div class="project-number">02</div>
+
+          <h3
+            data-ar="رسم ثلاثي الأبعاد"
+            data-en="3D Drawing"
+            data-tr="3 Boyutlu Çizim">
+‎            رسم ثلاثي الأبعاد
+          </h3>
+
+          <p
+            data-ar="محاولة لتمثيل المبنى بأبعاده الثلاثة وفهم شكله وحجمه."
+            data-en="An attempt to represent a building in three dimensions and understand its form and volume."
+            data-tr="Bir binayı üç boyutlu göstermeye ve biçimini ve hacmini anlamaya yönelik bir deneme.">
+‎            محاولة لتمثيل المبنى بأبعاده الثلاثة وفهم شكله وحجمه.
+          </p>
+
+        </div>
+
+      </article>
+
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- Mosque Project -->
+
+<section class="mosque" id="mosque">
+
+  <div class="container">
+
+
+
+    <h2 class="section-title"
+        data-ar="مشروع بسيط لمسجد بطابع عثماني يمني"
+        data-en="A Simple Mosque Project with an Ottoman–Yemeni Character"
+        data-tr="Osmanlı–Yemen Karakterinde Basit Bir Cami Projesi">
+‎      مشروع بسيط لمسجد بطابع عثماني يمني
+    </h2>
+
+    <p class="section-intro"
+       data-ar="فكرة بسيطة لتصميم مسجد يجمع بين ملامح العمارة العثمانية واليمنية، مستوحاة مما يعجبني فيهما من الضوء والفراغ والتفاصيل. هذا المشروع يعكس شغفي وطموحي."
+       data-en="A simple idea for a mosque that brings together features of Ottoman and Yemeni architecture, inspired by what I like in them about light, space and details. This project reflects my passion and ambition."
+       data-tr="Osmanlı ve Yemen mimarisinin özelliklerini bir araya getiren basit bir cami fikri. Bu fikirde her iki mimarinin ışık, mekân ve detaylarında beğendiklerimden ilham aldım. Bu proje tutkumu ve hedeflerimi yansıtıyor.">
+‎      فكرة بسيطة لتصميم مسجد يجمع بين ملامح العمارة العثمانية واليمنية، مستوحاة مما يعجبني فيهما من الضوء والفراغ والتفاصيل. هذا المشروع يعكس شغفي وطموحي.
+    </p>
+
+    <div class="concept-note">
+
+      <div class="concept-label"
+           data-ar="فكرة المشروع"
+           data-en="THE CONCEPT"
+           data-tr="PROJE FİKRİ">
+‎        فكرة المشروع
+      </div>
+
+      <p
+        data-ar="استلهمت فكرة هذا المشروع من جامع نور عثمانية في إسطنبول، الذي صممه المهندس اليوناني سيميون كالفا، حيث مزج بين العمارة العثمانية والطراز الباروكي الأوروبي، فخرج بهوية معمارية هجينة ومميزة لم تكن موجودة من قبل."
+        data-en="I drew the idea for this project from the Nuruosmaniye Mosque in Istanbul, designed by the Greek architect Simeon Kalfa, who merged Ottoman architecture with European Baroque style, producing a distinctive hybrid identity that hadn't existed before."
+        data-tr="Bu projenin fikrini, Yunan mimar Simeon Kalfa tarafından tasarlanan İstanbul'daki Nuruosmaniye Camii'nden aldım; Kalfa, Osmanlı mimarisini Avrupa Barok üslubuyla harmanlayarak daha önce var olmayan, kendine özgü melez bir kimlik ortaya çıkarmıştı.">
+‎        استلهمت فكرة هذا المشروع من جامع نور عثمانية في إسطنبول، الذي صممه المهندس اليوناني سيميون كالفا، حيث مزج بين العمارة العثمانية والطراز الباروكي الأوروبي، فخرج بهوية معمارية هجينة ومميزة لم تكن موجودة من قبل.
+      </p>
+
+      <p
+        data-ar="وبنفس هذا المبدأ، اعتمدت الطراز العثماني أساسًا للتصميم، ثم أدخلت عليه لمسات خفيفة من العمارة اليمنية — الطين والجص بطابع صنعاء القديمة — لتنتج هوية عثمانية يمنية تحمل طابعًا خاصًا، تمامًا كما حمل نور عثمانية طابعه العثماني الباروكي."
+        data-en="With that same principle, I took the Ottoman style as the base for the design, then brought in light touches of Yemeni architecture — mud and gypsum in the manner of Old Sana'a — to produce an Ottoman–Yemeni identity with its own character, much as Nuruosmaniye carried its own Ottoman-Baroque character."
+        data-tr="Aynı ilkeyle, tasarımın temeli olarak Osmanlı üslubunu aldım, ardından Yemen mimarisinden hafif dokunuşlar ekledim; kerpiç ve Eski Sana'a tarzında alçı. Böylece, tıpkı Nuruosmaniye'nin kendi Osmanlı-Barok karakterini taşıması gibi, kendine özgü bir Osmanlı-Yemen kimliği ortaya çıktı.">
+‎        وبنفس هذا المبدأ، اعتمدت الطراز العثماني أساسًا للتصميم، ثم أدخلت عليه لمسات خفيفة من العمارة اليمنية — الطين والجص بطابع صنعاء القديمة — لتنتج هوية عثمانية يمنية تحمل طابعًا خاصًا، تمامًا كما حمل نور عثمانية طابعه العثماني الباروكي.
+      </p>
+
+    </div>
+
+    <div class="mosque-grid">
+
+      <div class="mosque-image" id="mosqueViewer">
+
+        <canvas id="mosqueCanvas"
+                aria-label="مجسم ثلاثي الأبعاد للمسجد يمكن تدويره"></canvas>
+
+        <img id="mosqueFallback"
+             src="images/mosque.jpg"
+             alt="مشروع بسيط لمسجد بطابع عثماني يمني"
+             hidden
+             onerror="this.style.display='none'">
+
+        <div class="viewer-ui" id="viewerUI">
+
+          <span
+            data-ar="يمكنك سحب المجسم لتدويره وتحريكه للأعلى والأسفل"
+            data-en="You can drag the model to rotate it and tilt it up or down"
+            data-tr="Modeli sürükleyerek döndürebilir ve yukarı aşağı eğebilirsiniz">
+‎            يمكنك سحب المجسم لتدويره وتحريكه للأعلى والأسفل
+          </span>
+
+          <button class="viewer-reset"
+                  id="viewerReset"
+                  type="button"
+                  data-ar="الوضع الأصلي"
+                  data-en="Reset view"
+                  data-tr="İlk görünüm">
+‎            الوضع الأصلي
+          </button>
+
+        </div>
+
+      </div>
+
+      <div class="mosque-points">
+
+        <div class="mosque-point">
+          <div class="number">01</div>
+          <h3
+            data-ar="من العمارة العثمانية"
+            data-en="From Ottoman Architecture"
+            data-tr="Osmanlı Mimarisinden">
+‎            من العمارة العثمانية
+          </h3>
+          <p
+            data-ar="القباب والمآذن على الطراز العثماني مع نوافذ كبيرة تُدخل ضوء النهار، وساحة مفتوحة في الوسط تتوسطها سبيل للوضوء، تمامًا كما في ساحات المساجد التركية."
+            data-en="Domes, Ottoman-style minarets and large windows that bring in daylight, and an open central courtyard with an ablution fountain at its heart, just like the courtyards of Turkish mosques."
+            data-tr="Kubbeler, Osmanlı tarzı minareler ve gün ışığını içeri alan büyük pencereler; ortasında bir şadırvanın yer aldığı açık bir avlu, tıpkı Türk camilerinin avluları gibi.">
+‎            القباب والمآذن على الطراز العثماني مع نوافذ كبيرة تُدخل ضوء النهار، وساحة مفتوحة في الوسط تتوسطها سبيل للوضوء، تمامًا كما في ساحات المساجد التركية.
+          </p>
+        </div>
+
+        <div class="mosque-point">
+          <div class="number">02</div>
+          <h3
+            data-ar="من العمارة اليمنية"
+            data-en="From Yemeni Architecture"
+            data-tr="Yemen Mimarisinden">
+‎            من العمارة اليمنية
+          </h3>
+          <p
+            data-ar="استخدام الطين والجص والحجر والخشب، في جدار طيني يحيط بالساحة بعرض المسجد نفسه، بنوافذ صغيرة وجص أعلاه كجص المسجد."
+            data-en="The use of mud, gypsum, stone and wood, in a clay wall around the courtyard that matches the mosque's own width, with small windows and the same gypsum finish on top as the mosque."
+            data-tr="Kerpiç, alçı, taş ve ahşap kullanımı; caminin kendi genişliğinde, küçük pencereli ve üstünde caminin kendi alçısıyla aynı bitişe sahip bir avlu duvarı.">
+‎            استخدام الطين والجص والحجر والخشب، في جدار طيني يحيط بالساحة بعرض المسجد نفسه، بنوافذ صغيرة وجص أعلاه كجص المسجد.
+          </p>
+        </div>
+
+        <div class="mosque-point">
+          <div class="number">03</div>
+          <h3
+            data-ar="الهدف"
+            data-en="The Goal"
+            data-tr="Amaç">
+‎            الهدف
+          </h3>
+          <p
+            data-ar="محاولة الوصول إلى تصميم متوازن يحافظ على الهوية ويستجيب لاحتياجات المصلين اليوم."
+            data-en="An attempt at a balanced design that preserves identity and responds to the needs of today's worshippers."
+            data-tr="Kimliği koruyan ve günümüz cemaatinin ihtiyaçlarına yanıt veren dengeli bir tasarıma ulaşmaya çalışmak.">
+‎            محاولة الوصول إلى تصميم متوازن يحافظ على الهوية ويستجيب لاحتياجات المصلين اليوم.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- Research -->
+
+<section class="research" id="research">
+
+  <div class="container">
+
+    <div class="section-label"
+         data-ar="قراءات واهتمامات"
+         data-en="READING & INTERESTS"
+         data-tr="OKUMA VE İLGİ ALANLARI">
+‎      قراءات واهتمامات
+    </div>
+
+    <h2 class="section-title"
+        data-ar="اهتمامات بحثية"
+        data-en="Research Interests"
+        data-tr="Araştırma İlgi Alanları">
+‎      اهتمامات بحثية
+    </h2>
+
+    <div class="research-content">
+
+      <p
+        data-ar="أهتم بالتعرف على العمارة في ثقافات مختلفة، وخاصة العمارة العثمانية والعمارة اليمنية. يجذبني اختلاف الأساليب المعمارية والعناصر التصميمية وكيف تعبّر المباني عن تاريخ المكان وثقافته."
+        data-en="I am interested in exploring architecture across different cultures, particularly Ottoman and Yemeni architecture. I am drawn to the differences in architectural styles and design elements and how buildings express the history and culture of their surroundings."
+        data-tr="Farklı kültürlerdeki mimarlığı, özellikle Osmanlı ve Yemen mimarisini keşfetmekle ilgileniyorum. Mimari üsluplar ve tasarım öğelerindeki farklılıklar ile yapıların çevrelerinin tarihini ve kültürünü nasıl yansıttığı ilgimi çekiyor.">
+‎        أهتم بالتعرف على العمارة في ثقافات مختلفة، وخاصة العمارة العثمانية والعمارة اليمنية. يجذبني اختلاف الأساليب المعمارية والعناصر التصميمية وكيف تعبّر المباني عن تاريخ المكان وثقافته.
+      </p>
+
+      <p
+        data-ar="في العمارة العثمانية يلفت انتباهي توزيع الضوء داخل المساجد والمنازل والعلاقة بين الفراغ الداخلي والعناصر المعمارية. أما في العمارة اليمنية فأهتم باستخدام الحجر والطين والتفاصيل التي تمنح المباني طابعها المميز."
+        data-en="In Ottoman architecture I am particularly interested in the distribution of light within mosques and houses, and the relationship between interior spaces and architectural elements. In Yemeni architecture I am drawn to the use of stone and earth and the details that give buildings their distinctive character."
+        data-tr="Osmanlı mimarisinde camilerde ve evlerde ışığın dağılımına ve iç mekân ile mimari öğeler arasındaki ilişkiye ilgi duyuyorum. Yemen mimarisinde ise taş ve kerpiç kullanımı ve yapılara özgün karakter kazandıran detaylar dikkatimi çekiyor.">
+‎        في العمارة العثمانية يلفت انتباهي توزيع الضوء داخل المساجد والمنازل والعلاقة بين الفراغ الداخلي والعناصر المعمارية. أما في العمارة اليمنية فأهتم باستخدام الحجر والطين والتفاصيل التي تمنح المباني طابعها المميز.
+      </p>
+
+      <div class="research-note"
+           data-ar="هذه الاهتمامات تمثل بداية محاولاتي في التعرف على العمارة وتحليلها وأتطلع إلى تطويرها من خلال الدراسة والقراءة والتجربة."
+           data-en="These interests represent the beginning of my exploration of architecture and its analysis. I hope to develop them further through study, reading, and experience."
+           data-tr="Bu ilgi alanları, mimarlığı keşfetme ve analiz etme yolculuğumun başlangıcını temsil ediyor. Eğitim, okuma ve deneyim yoluyla bunları geliştirmeyi umuyorum.">
+‎        هذه الاهتمامات تمثل بداية محاولاتي في التعرف على العمارة وتحليلها وأتطلع إلى تطويرها من خلال الدراسة والقراءة والتجربة.
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- Vision -->
+
+<section class="vision" id="vision">
+
+  <div class="container">
+
+    <div class="section-label"
+         data-ar="توجهات"
+         data-en="PERSPECTIVES"
+         data-tr="BAKIŞ AÇILARI">
+‎      توجهات
+    </div>
+
+    <h2 class="section-title"
+        data-ar="ما يهمني في العمارة"
+        data-en="What Interests Me in Architecture"
+        data-tr="Mimarlıkta İlgi Duyduğum Konular">
+‎      ما يهمني في العمارة
+    </h2>
+
+    <p class="section-intro"
+       data-ar="أميل إلى النظر للمبنى باعتباره أكثر من شكل. فهو مساحة مرتبطة بمكانها وبالناس الذين يستخدمونها وبالضوء والمواد التي تكوّنها."
+       data-en="I see a building as more than a form. It is a space connected to its location, the people who use it and the light and materials that shape it."
+       data-tr="Bir yapıyı yalnızca biçim olarak görmüyorum. Yapı bulunduğu yerle, kullanan insanlarla, ışık ve malzemelerle bağlantılı bir mekândır.">
+‎      أميل إلى النظر للمبنى باعتباره أكثر من شكل. فهو مساحة مرتبطة بمكانها وبالناس الذين يستخدمونها وبالضوء والمواد التي تكوّنها.
+    </p>
+
+    <div class="vision-grid">
+
+      <article class="vision-card">
+
+        <div class="number">01</div>
+
+        <h3
+          data-ar="علاقة المبنى بمكانه"
+          data-en="Building & Context"
+          data-tr="Yapı ve Çevresi">
+‎          علاقة المبنى بمكانه
+        </h3>
+
+        <p
+          data-ar="يهمني كيف يتأثر تصميم المبنى بموقعه ومناخه وثقافة المكان وكيف يمكن أن يكون جزءًا من محيطه بدلًا من أن يكون منفصلًا عنه."
+          data-en="I am interested in how a building's design responds to its location, climate and culture, becoming part of its surroundings rather than separate from them."
+          data-tr="Bir yapının tasarımının konumuna, iklimine ve kültürüne nasıl yanıt verdiği ve çevresinden kopuk olmak yerine onun bir parçası olması ilgimi çekiyor.">
+‎          يهمني كيف يتأثر تصميم المبنى بموقعه ومناخه وثقافة المكان وكيف يمكن أن يكون جزءًا من محيطه بدلًا من أن يكون منفصلًا عنه.
+        </p>
+
+      </article>
+
+      <article class="vision-card">
+
+        <div class="number">02</div>
+
+        <h3
+          data-ar="الضوء والفراغ"
+          data-en="Light & Space"
+          data-tr="Işık ve Mekân">
+‎          الضوء والفراغ
+        </h3>
+
+        <p
+          data-ar="أهتم بطريقة دخول الضوء إلى المبنى وكيف يغيّر الإحساس بالمساحة ويؤثر في تجربة الإنسان داخل المكان."
+          data-en="I am interested in how light enters a building, changes the perception of space, and influences the human experience within it."
+          data-tr="Işığın yapıya nasıl girdiği, mekân algısını nasıl değiştirdiği ve insanın mekân içindeki deneyimini nasıl etkilediği ilgimi çekiyor.">
+‎          أهتم بطريقة دخول الضوء إلى المبنى وكيف يغيّر الإحساس بالمساحة ويؤثر في تجربة الإنسان داخل المكان.
+        </p>
+
+      </article>
+
+      <article class="vision-card">
+
+        <div class="number">03</div>
+
+        <h3
+          data-ar="التراث والعمارة الحديثة"
+          data-en="Heritage & Modern Architecture"
+          data-tr="Miras ve Modern Mimarlık">
+‎          التراث والعمارة الحديثة
+        </h3>
+
+        <p
+          data-ar="يجذبني فهم العناصر المعمارية التقليدية وكيف يمكن الاستفادة منها في تصميم معاصر يحافظ على الهوية ويستجيب لاحتياجات الحياة الحالية."
+          data-en="I am drawn to traditional architectural elements and how they can inform contemporary design while preserving identity and responding to modern needs."
+          data-tr="Geleneksel mimari öğelerin çağdaş tasarıma nasıl katkı sağlayabileceği, kimliği korurken günümüz ihtiyaçlarına nasıl yanıt verebileceği ilgimi çekiyor.">
+‎          يجذبني فهم العناصر المعمارية التقليدية وكيف يمكن الاستفادة منها في تصميم معاصر يحافظ على الهوية ويستجيب لاحتياجات الحياة الحالية.
+        </p>
+
+      </article>
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- Contact -->
+
+<section class="contact" id="contact">
+
+  <div class="container">
+
+    <div class="section-label"
+         data-ar="تواصل"
+         data-en="CONTACT"
+         data-tr="İLETİŞİM">
+‎      تواصل
+    </div>
+
+    <h2 class="section-title"
+        data-ar="يسعدني التواصل"
+        data-en="Let's Connect"
+        data-tr="İletişime Geçelim">
+‎      يسعدني التواصل
+    </h2>
+
+    <p
+      data-ar="للتواصل أو للاستفسار، يمكنكم مراسلتي عبر البريد الإلكتروني."
+      data-en="For inquiries or communication, feel free to reach me by email."
+      data-tr="Sorularınız veya iletişim için bana e-posta gönderebilirsiniz.">
+‎      للتواصل أو للاستفسار، يمكنكم مراسلتي عبر البريد الإلكتروني.
+    </p>
+
+    <a href="mailto:a4440767@gmail.com"
+       class="contact-email"
+       id="contactEmail">
+      a4440767@gmail.com
+    </a>
+
+    <br>
+
+    <a href="files/CV-ar.pdf"
+       id="cvLink"
+       class="cv-link"
+       target="_blank"
+       rel="noopener noreferrer"
+       data-ar="عرض السيرة الذاتية"
+       data-en="View CV"
+       data-tr="Özgeçmişi Görüntüle">
+‎      عرض السيرة الذاتية
+    </a>
+
+  </div>
+
+</section>
+
+</main>
+
+<!-- Footer -->
+
+<footer>
+
+  <div class="container footer-inner">
+
+    <div
+      data-ar="© 2026 اسامه الحداد"
+      data-en="© 2026 Osama Al-Haddad"
+      data-tr="© 2026 Osama Al-Haddad">
+‎      © 2026 اسامه الحداد
+    </div>
+
+    <div class="footer-name"
+         data-ar="الهندسة المعمارية"
+         data-en="Architecture"
+         data-tr="Mimarlık">
+‎      الهندسة المعمارية
+    </div>
+
+  </div>
+
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+<!-- JavaScript -->
+
+<script>
+"use strict";
+
+/* Settings */
+
+const CONTACT_EMAIL = "a4440767@gmail.com";
+
+let currentLanguage = "ar";
+
+const languages = ["ar", "en", "tr"];
+
+const languageNames = {
+  ar: "العربية",
+  en: "English",
+  tr: "Türkçe"
+};
+
+/* CV file for each language */
+
+const cvFiles = {
+  ar: "files/CV-ar.pdf",
+  en: "files/CV-en.pdf",
+  tr: "files/CV-tr.pdf"
+};
+
+/* Elements */
+
+const languageButton = document.getElementById("languageBtn");
+const navMenu = document.getElementById("navMenu");
+const backdrop = document.getElementById("backdrop");
+const menuButton = document.getElementById("menuBtn");
+const closeMenuButton = document.getElementById("closeMenuBtn");
+const cvLink = document.getElementById("cvLink");
+
+/* Language Switcher */
+
+function applyLanguage(language) {
+
+  if (!languages.includes(language)) {
+    language = "ar";
+  }
+
+  currentLanguage = language;
+
+  document.documentElement.lang = language;
+
+  /* The page layout stays the same in every language (left-to-right).
+     Arabic text itself still reads right-to-left via CSS. */
+  document.documentElement.dir = "ltr";
+
+  const elements = document.querySelectorAll(
+    "[data-ar][data-en][data-tr]"
+  );
+
+  elements.forEach(function(element) {
+
+    const translatedText =
+      element.getAttribute("data-" + language);
+
+    if (translatedText !== null) {
+      element.textContent = translatedText;
+    }
+
+  });
+
+  /* CV link follows the language */
+
+  if (cvLink) {
+    cvLink.href = cvFiles[language];
+  }
+
+  /* The button shows the CURRENT language */
+
+  if (languageButton) {
+    languageButton.textContent = languageNames[language];
+  }
+
+}
+
+/* Switch to the next language */
+
+function switchLanguage() {
+
+  const currentIndex =
+    languages.indexOf(currentLanguage);
+
+  const nextIndex =
+    (currentIndex + 1) % languages.length;
+
+  applyLanguage(languages[nextIndex]);
+
+}
+
+/* Navigation Menu */
+
+/* Open Menu */
+
+function openMenu() {
+
+  if (!navMenu || !backdrop || !menuButton) {
+    return;
+  }
+
+  navMenu.classList.add("active");
+
+  backdrop.classList.add("active");
+
+  document.body.classList.add("menu-open");
+
+  menuButton.setAttribute(
+    "aria-expanded",
+    "true"
+  );
+
+  navMenu.setAttribute(
+    "aria-hidden",
+    "false"
+  );
+
+}
+
+/* Close Menu */
+
+function closeMenu() {
+
+  if (navMenu) {
+    navMenu.classList.remove("active");
+
+    navMenu.setAttribute(
+      "aria-hidden",
+      "true"
+    );
+  }
+
+  if (backdrop) {
+    backdrop.classList.remove("active");
+  }
+
+  document.body.classList.remove("menu-open");
+
+  if (menuButton) {
+    menuButton.setAttribute(
+      "aria-expanded",
+      "false"
+    );
+  }
+
+}
+
+/* Toggle Menu */
+
+function toggleMenu() {
+
+  if (!navMenu) {
+    return;
+  }
+
+  const isOpen =
+    navMenu.classList.contains("active");
+
+  if (isOpen) {
+    closeMenu();
+  } else {
+    openMenu();
+  }
+
+}
+
+/* Navigation Link Fix */
+
+if (navMenu) {
+
+  navMenu.addEventListener(
+    "click",
+    function(event) {
+
+      const link =
+        event.target.closest("a[href^='#']");
+
+      if (!link) {
+        return;
+      }
+
+      const targetId =
+        link.getAttribute("href").slice(1);
+
+      const targetSection =
+        document.getElementById(targetId);
+
+      if (!targetSection) {
+        return;
+      }
+
+      event.preventDefault();
+
+      closeMenu();
+
+      window.setTimeout(function() {
+
+        targetSection.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+
+        if (window.location.hash !== "#" + targetId) {
+
+          history.pushState(
+            null,
+            "",
+            "#" + targetId
+          );
+
+        }
+
+      }, 200);
+
+    }
+  );
+
+}
+
+/* Logo Navigation */
+
+const logo = document.querySelector(".logo");
+
+if (logo) {
+
+  logo.addEventListener(
+    "click",
+    function(event) {
+
+      const homeSection =
+        document.getElementById("home");
+
+      if (!homeSection) {
+        return;
+      }
+
+      event.preventDefault();
+
+      closeMenu();
+
+      window.setTimeout(function() {
+
+        homeSection.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+
+        history.pushState(
+          null,
+          "",
+          "#home"
+        );
+
+      }, 200);
+
+    }
+  );
+
+}
+
+/* Close Menu Controls */
+
+/* Backdrop */
+
+if (backdrop) {
+
+  backdrop.addEventListener(
+    "click",
+    closeMenu
+  );
+
+}
+
+/* Close Button */
+
+if (closeMenuButton) {
+
+  closeMenuButton.addEventListener(
+    "click",
+    function(event) {
+
+      event.preventDefault();
+
+      closeMenu();
+
+    }
+  );
+
+}
+
+/* Escape Key */
+
+document.addEventListener(
+  "keydown",
+  function(event) {
+
+    if (event.key === "Escape") {
+      closeMenu();
+    }
+
+  }
+);
+
+/* Language Button */
+
+if (languageButton) {
+
+  languageButton.addEventListener(
+    "click",
+    switchLanguage
+  );
+
+}
+
+/* Menu Button */
+
+if (menuButton) {
+
+  menuButton.addEventListener(
+    "click",
+    toggleMenu
+  );
+
+}
+
+/* Contact Email */
+
+const contactEmail =
+  document.getElementById("contactEmail");
+
+if (contactEmail) {
+
+  contactEmail.textContent =
+    CONTACT_EMAIL;
+
+  contactEmail.href =
+    "mailto:" + CONTACT_EMAIL;
+
+}
+
+/* Initial Settings */
+
+/* Arabic as the default language */
+
+applyLanguage("ar");
+
+/* Ensure the menu is initially closed */
+
+closeMenu();
+
+</script>
+
+<!-- 3D Mosque Viewer -->
+
+<script>
+(function () {
+
+  var canvas = document.getElementById("mosqueCanvas");
+  var box = document.getElementById("mosqueViewer");
+  var fallback = document.getElementById("mosqueFallback");
+  var ui = document.getElementById("viewerUI");
+  var resetBtn = document.getElementById("viewerReset");
+
+  function useFallback() {
+    if (canvas) { canvas.style.display = "none"; }
+    if (ui) { ui.style.display = "none"; }
+    if (fallback) { fallback.hidden = false; }
+  }
+
+  if (!canvas || !box || typeof THREE === "undefined") {
+    useFallback();
+    return;
+  }
+
+  var renderer;
+
+  try {
+    renderer = new THREE.WebGLRenderer({
+      canvas: canvas,
+      antialias: true,
+      alpha: true
+    });
+  } catch (error) {
+    useFallback();
+    return;
+  }
+
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+
+  var scene = new THREE.Scene();
+  var camera = new THREE.PerspectiveCamera(38, 1, 0.1, 200);
+  var root = new THREE.Group();
+  scene.add(root);
+
+  /* Lights */
+
+  scene.add(new THREE.AmbientLight(0xffffff, 0.55));
+
+  scene.add(new THREE.HemisphereLight(0xdbe9f1, 0x46617a, 0.45));
+
+  var sun = new THREE.DirectionalLight(0xfff1d6, 0.85);
+  sun.position.set(14, 24, 18);
+  scene.add(sun);
+
+  /* Helpers */
+
+  function mat(color) {
+    return new THREE.MeshLambertMaterial({ color: color });
+  }
+
+  function put(mesh, x, y, z) {
+    mesh.position.set(x, y, z);
+    root.add(mesh);
+    return mesh;
+  }
+
+  function box3(w, h, d, color, x, y, z) {
+    return put(new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat(color)), x, y, z);
+  }
+
+  function cyl(rTop, rBottom, h, color, x, y, z) {
+    return put(new THREE.Mesh(new THREE.CylinderGeometry(rTop, rBottom, h, 32), mat(color)), x, y, z);
+  }
+
+  function dome(r, color, x, y, z) {
+    var geometry = new THREE.SphereGeometry(r, 32, 16, 0, Math.PI * 2, 0, Math.PI / 2);
+    return put(new THREE.Mesh(geometry, mat(color)), x, y, z);
+  }
+
+  function sphere(r, color, x, y, z) {
+    return put(new THREE.Mesh(new THREE.SphereGeometry(r, 16, 12), mat(color)), x, y, z);
+  }
+
+  /* Colors */
+
+  var CREAM = 0xefe6d2;
+  var CLAY = 0xc19a6b;
+  var STONE = 0x6b6f73;
+  var LEAD = 0x8a97a0;
+  var WHITE = 0xfbfaf5;
+  var GOLD = 0xc9a23a;
+  var GLASS = 0x4a6f94;
+  var DARK = 0x3b2f26;
+  var GREEN = 0x4e6b4a;
+
+  /* Ground and platform */
+
+  var ground = new THREE.Mesh(new THREE.CircleGeometry(22, 64), mat(0x46617a));
+  ground.rotation.x = -Math.PI / 2;
+  root.add(ground);
+
+  box3(16.4, 0.6, 12.4, STONE, 0, 0.3, 0);
+
+  /* courtyard floor, in front of the mosque entrance */
+  var COURT_X = 6.0;
+  var COURT_Z_NEAR = 4.0;
+  var COURT_Z_FAR = 15.8;
+  var COURT_CZ = (COURT_Z_NEAR + COURT_Z_FAR) / 2;
+
+  box3(COURT_X * 2 + 0.8, 0.5, COURT_Z_FAR - COURT_Z_NEAR + 0.6, STONE,
+    0, 0.25, COURT_CZ);
+
+  /* Main body */
+
+  box3(12.2, 0.8, 8.2, STONE, 0, 1.0, 0);
+  box3(12, 4, 8, CLAY, 0, 2.6, 0);
+  box3(12.3, 0.25, 8.3, WHITE, 0, 4.725, 0);
+
+  /* Central dome */
+
+  cyl(2.6, 2.6, 2.2, CLAY, 0, 5.95, 0);
+  dome(2.75, LEAD, 0, 7.05, 0);
+  cyl(0.07, 0.07, 1.2, GOLD, 0, 10.4, 0);
+  sphere(0.2, GOLD, 0, 11.1, 0);
+
+  for (var k = 0; k < 8; k++) {
+    var a = k * Math.PI / 4;
+    var drumWindow = box3(0.55, 1.0, 0.12, 0x3c4a5a,
+      Math.sin(a) * 2.62, 5.95, Math.cos(a) * 2.62);
+    drumWindow.rotation.y = a;
+  }
+
+  /* Side semi-domes, left/right and front/back: four domes around the
+     central dome, for a fuller Ottoman roofline */
+
+  [-4.2, 4.2].forEach(function (x) {
+    dome(1.8, LEAD, x, 4.85, 0);
+    cyl(0.05, 0.05, 0.7, GOLD, x, 6.95, 0);
+    sphere(0.13, GOLD, x, 7.4, 0);
+  });
+
+  [-3.0, 3.0].forEach(function (z) {
+    dome(1.55, LEAD, 0, 4.85, z);
+    cyl(0.05, 0.05, 0.6, GOLD, 0, 6.75, z);
+    sphere(0.12, GOLD, 0, 7.15, z);
+  });
+
+  /* Minaret, reusable: baseBottomY sets where its base stands, scale resizes it whole */
+
+  function minaret(x, z, baseBottomY, scale) {
+    scale = scale || 1;
+
+    function Y(offset) {
+      return baseBottomY + offset * scale;
+    }
+
+    box3(1.4 * scale, 1.6 * scale, 1.4 * scale, CLAY, x, Y(0.8), z);
+    cyl(0.38 * scale, 0.5 * scale, 9.4 * scale, CLAY, x, Y(6.3), z);
+    cyl(0.85 * scale, 0.7 * scale, 0.3 * scale, WHITE, x, Y(7.8), z);
+    cyl(0.8 * scale, 0.65 * scale, 0.3 * scale, WHITE, x, Y(9.6), z);
+
+    var cap = new THREE.Mesh(new THREE.ConeGeometry(0.6 * scale, 2.6 * scale, 24), mat(LEAD));
+    put(cap, x, Y(12.3), z);
+
+    cyl(0.04 * scale, 0.04 * scale, 0.8 * scale, GOLD, x, Y(13.8), z);
+    sphere(0.12 * scale, GOLD, x, Y(14.25), z);
+  }
+
+  /* The mosque's own two minarets: half the base is inside the wall, half sticks out */
+
+  minaret(-6.0, -3.2, 0.6, 1);
+  minaret(6.0, -3.2, 0.6, 1);
+
+  /* Entrance */
+
+  box3(3.4, 4.0, 0.8, CLAY, 0, 2.6, 4.4);
+
+  function flatRect(w, h, color, x, y, z) {
+    var m = new THREE.Mesh(new THREE.PlaneGeometry(w, h), mat(color));
+    return put(m, x, y, z);
+  }
+
+  function flatArch(r, color, x, y, z) {
+    var m = new THREE.Mesh(new THREE.CircleGeometry(r, 24, 0, Math.PI), mat(color));
+    return put(m, x, y, z);
+  }
+
+  flatRect(1.9, 2.5, WHITE, 0, 1.85, 4.81);
+  flatArch(0.95, WHITE, 0, 3.1, 4.81);
+  flatRect(1.6, 2.4, DARK, 0, 1.8, 4.82);
+  flatArch(0.8, DARK, 0, 3.0, 4.82);
+
+  /* Large arched windows, plain glazing in a gypsum frame (Ottoman-style, no qamariyya) */
+
+  function archWindow(x, y, z, rotationY, scale) {
+    scale = scale || 1;
+    var g = new THREE.Group();
+    var w = 1.4 * scale;
+    var h = 2.0 * scale;
+    var r = w / 2;
+
+    function part(geometry, color, px, py, pz) {
+      var m = new THREE.Mesh(geometry, mat(color));
+      m.position.set(px, py, pz);
+      g.add(m);
+    }
+
+    /* thick outer gypsum surround, Old Sana'a style */
+    part(new THREE.PlaneGeometry(w + 0.34, h + 0.2), WHITE, 0, (h + 0.2) / 2, 0.015);
+    part(new THREE.CircleGeometry(r + 0.17, 24, 0, Math.PI), WHITE, 0, h + 0.2, 0.015);
+
+    /* a thin recessed reveal line between the surround and the glass */
+    part(new THREE.PlaneGeometry(w + 0.1, h + 0.06), DARK, 0, (h + 0.06) / 2, 0.022);
+    part(new THREE.CircleGeometry(r + 0.05, 24, 0, Math.PI), DARK, 0, h + 0.06, 0.022);
+
+    /* plain glass, full height including the arch */
+    part(new THREE.PlaneGeometry(w, h), GLASS, 0, h / 2, 0.03);
+    part(new THREE.CircleGeometry(r, 24, 0, Math.PI), GLASS, 0, h, 0.03);
+
+    /* a single slim muntin bar for definition */
+    part(new THREE.PlaneGeometry(0.05, h + r), WHITE, 0, (h + r) / 2, 0.035);
+
+    /* small stepped gypsum cresting above the window, echoing the
+       pinnacle merlons on the roofline above */
+    var capW = w * 0.46;
+    part(new THREE.PlaneGeometry(capW, 0.1 * scale), WHITE, 0, h + r + 0.16 * scale, 0.02);
+    part(new THREE.PlaneGeometry(capW * 0.6, 0.1 * scale), WHITE, 0, h + r + 0.27 * scale, 0.02);
+    part(new THREE.PlaneGeometry(capW * 0.26, 0.1 * scale), WHITE, 0, h + r + 0.38 * scale, 0.02);
+
+    g.position.set(x, y, z);
+    g.rotation.y = rotationY;
+    root.add(g);
+  }
+
+  var baseY = 1.6;
+
+  [-4.8, -2.7, 2.7, 4.8].forEach(function (x) {
+    archWindow(x, baseY, 4.0, 0);
+  });
+
+  [-4.8, -2.9, -1, 1, 2.9, 4.8].forEach(function (x) {
+    archWindow(x, baseY, -4.0, Math.PI);
+  });
+
+  [-2.6, -0.9, 0.8].forEach(function (z) {
+    archWindow(6.0, baseY, z, Math.PI / 2);
+    archWindow(-6.0, baseY, z, -Math.PI / 2);
+  });
+
+  /* A stepped, tapering gypsum merlon - the little pinnacle crenellations
+     typical of Old Sana'a rooflines - used everywhere a "gypsum tooth"
+     is needed on this project, on the mosque and on the courtyard wall. */
+
+  function gypsumMerlon(bx, by, bz, alongX) {
+    var w1 = alongX ? 0.56 : 0.32;
+    var d1 = alongX ? 0.32 : 0.56;
+    box3(w1, 0.16, d1, WHITE, bx, by + 0.08, bz);
+    box3(w1 * 0.66, 0.15, d1 * 0.66, WHITE, bx, by + 0.16 + 0.075, bz);
+    box3(w1 * 0.34, 0.15, d1 * 0.34, WHITE, bx, by + 0.31 + 0.075, bz);
+  }
+
+  /* Gypsum merlons along the roofline */
+
+  for (var i = 0; i < 11; i++) {
+    var xm = -5.5 + i * 1.1;
+    gypsumMerlon(xm, 4.85, 3.95, true);
+    gypsumMerlon(xm, 4.85, -3.95, true);
+  }
+
+  for (var n = 0; n < 6; n++) {
+    var zm = -3.3 + n * 1.1;
+    gypsumMerlon(5.95, 4.85, zm, false);
+    gypsumMerlon(-5.95, 4.85, zm, false);
+  }
+
+  /* Courtyard perimeter: a single low, solid clay wall, exactly the
+     mosque's own width, carrying small glass windows and finished with
+     the same gypsum merlons as the mosque's own roofline. It is built
+     straight onto the mosque's corners, with no gap left between them. */
+
+  var ARC_BASE_Y = 0.5;        /* courtyard floor level */
+  var CY_WALL_H = 3.0;
+  var CY_WALL_T = 0.55;
+  var CY_WALL_TOP = CY_WALL_H;
+  var wallD = COURT_Z_FAR - COURT_Z_NEAR;
+
+  /* gypsum merlons, the same stepped Sana'a shape as the mosque's own roofline */
+  function wallTeeth(cx, cz, length, alongX) {
+    var count = Math.max(2, Math.round(length / 1.1) + 1);
+    for (var t = 0; t < count; t++) {
+      var off = -length / 2 + (length / (count - 1)) * t;
+      if (alongX) {
+        gypsumMerlon(cx + off, CY_WALL_TOP - 0.06, cz, true);
+      } else {
+        gypsumMerlon(cx, CY_WALL_TOP - 0.06, cz + off, false);
+      }
+    }
+  }
+
+  /* a light decorative touch on the wall face: a thin string-course band
+     and a row of small diamond motifs, picked out in gypsum white */
+  function wallDecor(cx, cz, length, alongX, outward) {
+    var bandY = CY_WALL_H * 0.78;
+    var bandY2 = bandY - 0.22;
+
+    [bandY, bandY2].forEach(function (by) {
+      if (alongX) {
+        box3(length, 0.07, 0.05, WHITE, cx, by, cz + outward * (CY_WALL_T / 2 + 0.01));
+      } else {
+        box3(0.05, 0.07, length, WHITE, cx + outward * (CY_WALL_T / 2 + 0.01), by, cz);
+      }
+    });
+
+    var count = Math.max(2, Math.round(length / 1.1));
+
+    for (var d = 0; d < count; d++) {
+      var off = -length / 2 + (length / count) * (d + 0.5);
+      var dm = new THREE.Mesh(new THREE.PlaneGeometry(0.2, 0.2), mat(WHITE));
+
+      if (alongX) {
+        dm.position.set(cx + off, CY_WALL_H * 0.38, cz + outward * (CY_WALL_T / 2 + 0.015));
+        if (outward < 0) { dm.rotation.y = Math.PI; }
+      } else {
+        dm.position.set(cx + outward * (CY_WALL_T / 2 + 0.015), CY_WALL_H * 0.38, cz + off);
+        dm.rotation.y = outward < 0 ? Math.PI / 2 : -Math.PI / 2;
+      }
+
+      dm.rotation.z = Math.PI / 4;
+      root.add(dm);
+    }
+  }
+
+  /* side walls, solid clay, exactly the mosque's own width apart, no glazing */
+
+  [-1, 1].forEach(function (side) {
+    var x = side * COURT_X;
+
+    box3(CY_WALL_T, CY_WALL_H, wallD, CLAY, x, CY_WALL_H / 2, COURT_CZ);
+
+    /* a gypsum cap, exactly the wall's own width, bonded flush onto the clay */
+    box3(CY_WALL_T, 0.12, wallD, WHITE, x, CY_WALL_TOP - 0.03, COURT_CZ);
+
+    wallTeeth(x, COURT_CZ, wallD - 0.6, false);
+    wallDecor(x, COURT_CZ, wallD - 0.6, false, side);
+
+    /* small windows running along the wall */
+    var nSideWin = 5;
+    for (var sw = 0; sw < nSideWin; sw++) {
+      var swz = COURT_Z_NEAR + (wallD / (nSideWin + 1)) * (sw + 1);
+      archWindow(x + side * (CY_WALL_T / 2 + 0.02), 1.5, swz, side < 0 ? Math.PI / 2 : -Math.PI / 2, 0.55);
+    }
+  });
+
+  /* far wall, closed, with a real door at the centre */
+
+  box3(COURT_X * 2 + CY_WALL_T, CY_WALL_H, CY_WALL_T, CLAY, 0, CY_WALL_H / 2, COURT_Z_FAR);
+
+  /* a gypsum cap, exactly the wall's own width, bonded flush onto the clay */
+  box3(COURT_X * 2 + CY_WALL_T, 0.12, CY_WALL_T, WHITE, 0, CY_WALL_TOP - 0.03, COURT_Z_FAR);
+
+  wallTeeth(0, COURT_Z_FAR, COURT_X * 2 - 0.6, true);
+  wallDecor(0, COURT_Z_FAR, COURT_X * 2 - 0.6, true, 1);
+
+  /* small windows either side of the door */
+  [-4.6, -2.3, 2.3, 4.6].forEach(function (fx2) {
+    archWindow(fx2, 1.5, COURT_Z_FAR - CY_WALL_T / 2 - 0.02, Math.PI, 0.55);
+  });
+
+  /* door: a shallow projecting portal with a real dark door leaf set in it,
+     shown on the outside face... */
+  box3(2.2, 2.6, 0.9, CLAY, 0, 1.3, COURT_Z_FAR + 0.15);
+  flatRect(1.7, 2.3, WHITE, 0, 1.3, COURT_Z_FAR + 0.61);
+  flatArch(0.85, WHITE, 0, 2.45, COURT_Z_FAR + 0.61);
+  flatRect(1.4, 2.0, DARK, 0, 1.2, COURT_Z_FAR + 0.62);
+  flatArch(0.7, DARK, 0, 2.2, COURT_Z_FAR + 0.62);
+
+  /* ...and again on the inside face, so the door reads from inside the
+     courtyard as well, not only from outside */
+  flatRect(1.7, 2.3, WHITE, 0, 1.3, COURT_Z_FAR - 0.31).rotation.y = Math.PI;
+  flatArch(0.85, WHITE, 0, 2.45, COURT_Z_FAR - 0.31).rotation.y = Math.PI;
+  flatRect(1.4, 2.0, DARK, 0, 1.2, COURT_Z_FAR - 0.32).rotation.y = Math.PI;
+  flatArch(0.7, DARK, 0, 2.2, COURT_Z_FAR - 0.32).rotation.y = Math.PI;
+
+  /* a minaret at every corner of the courtyard */
+
+  minaret(-6.0, 3.2, 0.6, 0.8);
+  minaret(6.0, 3.2, 0.6, 0.8);
+  minaret(-COURT_X, COURT_Z_FAR, ARC_BASE_Y, 0.8);
+  minaret(COURT_X, COURT_Z_FAR, ARC_BASE_Y, 0.8);
+
+  /* Central ablution fountain (şadırvan), in the middle of the courtyard
+     as in Ottoman mosque courtyards */
+
+  var fx = 0;
+  var fz = COURT_CZ;
+
+  cyl(1.7, 1.75, 0.5, STONE, fx, 0.75, fz);
+  cyl(1.4, 1.4, 0.08, GLASS, fx, 1.04, fz);
+  cyl(0.16, 0.16, 1.5, WHITE, fx, 1.75, fz);
+
+  for (var fc = 0; fc < 8; fc++) {
+    var fang = fc * Math.PI / 4;
+    cyl(0.07, 0.07, 2.3, WHITE, fx + Math.sin(fang) * 1.75, 1.75, fz + Math.cos(fang) * 1.75);
+  }
+
+  cyl(1.9, 1.9, 0.18, CLAY, fx, 2.95, fz);
+  dome(1.8, LEAD, fx, 3.05, fz);
+  cyl(0.05, 0.05, 0.5, GOLD, fx, 4.65, fz);
+  sphere(0.13, GOLD, fx, 4.95, fz);
+
+  /* Cypress trees, inside the courtyard corners */
+
+  [-COURT_X + 1.1, COURT_X - 1.1].forEach(function (x) {
+    [COURT_Z_NEAR + 1.2, COURT_Z_FAR - 1.2].forEach(function (z) {
+      var tree = new THREE.Mesh(new THREE.ConeGeometry(0.6, 2.9, 16), mat(GREEN));
+      put(tree, x, 1.45, z);
+    });
+  });
+
+  /* Camera control */
+
+  var target = new THREE.Vector3(0, 4.5, 6);
+  var START = { az: 0.6, el: 0.32, dist: 46 };
+  var az = START.az;
+  var el = START.el;
+  var dist = START.dist;
+
+  var autoRotate = true;
+  var dragging = false;
+  var lastX = 0;
+  var lastY = 0;
+  var resumeTimer = null;
+  var visible = true;
+
+  function updateCamera() {
+    camera.position.set(
+      target.x + dist * Math.sin(az) * Math.cos(el),
+      target.y + dist * Math.sin(el),
+      target.z + dist * Math.cos(az) * Math.cos(el)
+    );
+    camera.lookAt(target);
+  }
+
+  function resize() {
+    var w = box.clientWidth;
+    var h = box.clientHeight;
+
+    if (!w || !h) { return; }
+
+    renderer.setSize(w, h, false);
+    camera.aspect = w / h;
+
+    /* Keep the whole mosque in view on narrow screens */
+    dist = START.dist * (w / h < 1.2 ? 1.25 : 1);
+
+    camera.updateProjectionMatrix();
+  }
+
+  canvas.addEventListener("pointerdown", function (event) {
+    dragging = true;
+    autoRotate = false;
+    lastX = event.clientX;
+    lastY = event.clientY;
+
+    if (resumeTimer) { window.clearTimeout(resumeTimer); }
+
+    if (canvas.setPointerCapture) {
+      try { canvas.setPointerCapture(event.pointerId); } catch (error) {}
+    }
+  });
+
+  canvas.addEventListener("pointermove", function (event) {
+    if (!dragging) { return; }
+
+    var dx = event.clientX - lastX;
+    var dy = event.clientY - lastY;
+
+    lastX = event.clientX;
+    lastY = event.clientY;
+
+    az -= dx * 0.006;
+    el += dy * 0.006;
+    el = Math.max(0.05, Math.min(1.35, el));
+  });
+
+  function endDrag() {
+    if (!dragging) { return; }
+
+    dragging = false;
+    resumeTimer = window.setTimeout(function () {
+      autoRotate = true;
+    }, 4000);
+  }
+
+  canvas.addEventListener("pointerup", endDrag);
+  canvas.addEventListener("pointercancel", endDrag);
+
+  if (resetBtn) {
+    resetBtn.addEventListener("click", function () {
+      az = START.az;
+      el = START.el;
+      autoRotate = true;
+    });
+  }
+
+  window.addEventListener("resize", resize);
+
+  if (window.ResizeObserver) {
+    new ResizeObserver(resize).observe(box);
+  }
+
+  if (window.IntersectionObserver) {
+    new IntersectionObserver(function (entries) {
+      visible = entries[0].isIntersecting;
+    }).observe(box);
+  }
+
+  function animate() {
+    window.requestAnimationFrame(animate);
+
+    if (!visible) { return; }
+
+    if (autoRotate) { az += 0.004; }
+
+    updateCamera();
+    renderer.render(scene, camera);
+  }
+
+  resize();
+  animate();
+
+})();
+</script>
+
+</body>
+</html>
